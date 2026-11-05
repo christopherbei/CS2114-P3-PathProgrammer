@@ -4,13 +4,12 @@ public class Main
 {
     public static enum moves
     {
-        UP,
-        DOWN,
+        FORWARDS,
         LEFT,
         RIGHT
     }
 
-
+    // may not be used
     public static enum tiles
     {
         PLAYER,
