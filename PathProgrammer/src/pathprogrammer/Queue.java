@@ -1,10 +1,23 @@
 package pathprogrammer;
 
+import java.util.*;
+
+/**
+ * A queue data type to store information for this project.
+ * 
+ * @param <T>
+ *            type of stored data
+ * @author Group 7
+ * @version 5 Nov 2026
+ */
 public class Queue<T>
 {
     private Node<T> head;
     private int size;
 
+    /**
+     * initializes the queue
+     */
     public Queue()
     {
         head = null;
@@ -12,6 +25,10 @@ public class Queue<T>
     }
 
 
+    /**
+     * @param value
+     *            value to add to the queue
+     */
     public void enqueue(T value)
     {
         Node<T> newNode = new Node<T>(value);
@@ -34,54 +51,50 @@ public class Queue<T>
     }
 
 
+    /**
+     * Removes the top value from the queue and returns it
+     * 
+     * @return the value of the top element in the queue
+     * @throws RuntimeException
+     *             if the queue is empty
+     */
     public T dequeue()
     {
-        if (head == null)
+        if (isEmpty())
         {
-            return null;
+            throw new RuntimeException();
         }
 
-        Node<T> previousNode = null;
-        Node<T> currNode = head;
+        T data = head.getData();
 
-        while (currNode.getNext() != null)
-        {
-            previousNode = currNode;
-            currNode = currNode.getNext();
-        }
-
-        if (previousNode != null)
-        {
-            previousNode.setNext(null);
-        }
-        else
-        {
-            head = null;
-        }
-
+        head = head.getNext();
         size--;
-        return currNode.getData();
+
+        return data;
     }
 
 
+    /**
+     * Returns the top of the queue without modifying it
+     * 
+     * @return the value of the top element in the queue
+     * @throws RuntimeException
+     *             if the queue is empty
+     */
     public T peek()
     {
-        if (head == null)
+        if (isEmpty())
         {
-            return null;
+            throw new RuntimeException();
         }
 
-        Node<T> currNode = head;
-
-        while (currNode.getNext() != null)
-        {
-            currNode = currNode.getNext();
-        }
-
-        return currNode.getData();
+        return head.getData();
     }
 
 
+    /**
+     * clears the queue of all data
+     */
     public void clear()
     {
         head = null;
@@ -89,12 +102,18 @@ public class Queue<T>
     }
 
 
+    /**
+     * @return true if there are no elements in the queue
+     */
     public boolean isEmpty()
     {
         return head == null;
     }
 
 
+    /**
+     * @return the queue in the form of an array
+     */
     @SuppressWarnings("unchecked")
     public T[] toArray()
     {
