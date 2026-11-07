@@ -34,7 +34,8 @@ public class Main
         WALL,
         GOAL
     }
-
+    
+    // TODO make a working map data string
     private static String mapdata = "something";
     private static boolean running = false;
 
@@ -47,7 +48,12 @@ public class Main
      */
     public static void main(String[] args)
     {
-        System.out.println("PATH PROGRAMMER");
+        System.out.println("                                                                                  \r\n"
+            + " _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ _____ _____ _____ \r\n"
+            + "|  _  |  _  |_   _|  |  |  |  _  | __  |   __| __  |  _  |     |     |   __| __  |\r\n"
+            + "|   __|     | | | |     |  |   __|    -|  |  |    -|     | | | | | | |   __|    -|\r\n"
+            + "|__|  |__|__| |_| |__|__|  |__|  |__|__|_____|__|__|__|__|_|_|_|_|_|_|_____|__|__|\r\n"
+            + "                                                                                  ");
         System.out.println(
             "use commands 'forward' 'right' and 'left' to set your moves");
         System.out.println(
@@ -74,7 +80,7 @@ public class Main
         }
         else
         {
-            System.out.println("you lost, try again.");
+            System.out.println("you lost... try again?");
         }
 
         Display.displayMap(map.getMap());
