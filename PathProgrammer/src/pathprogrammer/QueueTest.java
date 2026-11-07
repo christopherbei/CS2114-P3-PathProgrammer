@@ -102,7 +102,7 @@ class QueueTest
     {
         String[] emptyArray = new String[0];
 
-        assertTrue(Arrays.equals(emptyArray, queue.toArray()));
+        assertTrue(Arrays.equals(emptyArray, queue.toArray(String.class)));
 
         queue.enqueue("orange");
         queue.enqueue("yellow");
@@ -111,6 +111,6 @@ class QueueTest
 
         String[] fullArray = { "orange", "yellow", "green", "purple" };
 
-        assertTrue(Arrays.equals(fullArray, queue.toArray()));
+        assertTrue(Arrays.equals(fullArray, queue.toArray(String.class)));
     }
 }

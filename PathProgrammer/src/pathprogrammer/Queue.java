@@ -1,6 +1,6 @@
 package pathprogrammer;
 
-import java.util.*;
+import java.lang.reflect.Array;
 
 /**
  * A queue data type to store information for this project.
@@ -115,9 +115,9 @@ public class Queue<T>
      * @return the queue in the form of an array
      */
     @SuppressWarnings("unchecked")
-    public T[] toArray()
+    public T[] toArray(Class<T> type)
     {
-        T[] array = (T[])new Object[size];
+        T[] array = (T[]) Array.newInstance(type, size);
 
         Node<T> currNode = head;
         int index = 0;

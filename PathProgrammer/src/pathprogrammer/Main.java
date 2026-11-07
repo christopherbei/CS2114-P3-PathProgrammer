@@ -20,7 +20,24 @@ public class Main
         RIGHT
     }
 
+
+    /**
+     * enum to represent all tiles and player orientations
+     */
+    public static enum tiles
+    {
+        PLAYER_RIGHT,
+        PLAYER_UP,
+        PLAYER_LEFT,
+        PLAYER_DOWN,
+        FLOOR,
+        WALL,
+        FINISH
+    }
+
     private static String mapdata = "something";
+    private static boolean running = false;
+
     private static Scanner input;
     private static Map map;
     private static Queue<moves> commands;
@@ -37,55 +54,75 @@ public class Main
             "type 'run' to play through your commands and 'quit' to stop the program");
         System.out.println();
 
-        
         input = new Scanner(System.in);
         map = new Map(mapdata);
         commands = new Queue<>();
 
-        // print initial map probably
-        while (validateInput()){
-            // TODO
-            // print map and do other stuff idk
+        while (!running)
+        {
+            Display.displayMap(map.getMap());
+            Display.displayMoves(commands.toArray(moves.class));
+
+            validateInput();
         }
-        // check win condition and end the game
-        // maybe chain into other levels
+
+        runCommands();
+
+        if (map.winCondition())
+        {
+            System.out.println("congratulations! you win!");
+        }
+        else
+        {
+            System.out.println("you lost, try again.");
+        }
+
+        Display.displayMap(map.getMap());
+        Display.displayMoves(commands.toArray(moves.class));
     }
 
 
     /**
      * takes user input and runs the corresponding command, if valid
-     * 
-     * @return boolean to determine if the game loop continues or not
      */
-    public static boolean validateInput()
+    public static void validateInput()
     {
+        // takes and cleans up user input
         System.out.print("input a command: ");
         String command = input.nextLine();
-
         command = command.toLowerCase().trim();
 
+        // prints new lines to clean up console
+        for (int i = 0; i < 50; i++)
+        {
+            System.out.println();
+        }
+
+        // checks for valid commands and runs / adds them
         switch (command)
         {
             case "forward":
                 commands.enqueue(moves.FORWARD);
-                return true;
+                System.out.println("command added.");
+                break;
             case "left":
                 commands.enqueue(moves.LEFT);
-                return true;
+                System.out.println("command added.");
+                break;
             case "right":
                 commands.enqueue(moves.RIGHT);
-                return true;
+                System.out.println("command added.");
+                break;
             case "run":
+                running = true;
                 System.out.println("running all moves:");
-                runCommands();
-                return false;
+                break;
             case "quit":
                 System.out.println("quitting...");
                 System.exit(0);
-                return false;
             default:
                 System.out.println("command not recognized, try again.");
-                return true;
+                break;
         }
     }
 
@@ -95,7 +132,33 @@ public class Main
      */
     public static void runCommands()
     {
+        while (!commands.isEmpty())
+        {
+            Display.displayMap(map.getMap());
+            Display.displayMoves(commands.toArray(moves.class));
 
-        // TODO
+            boolean failed = map.movePlayer(commands.dequeue());
+
+            if (failed)
+            {
+                break;
+            }
+
+            // delays console for one second
+            try
+            {
+                Thread.sleep(1000);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+
+            // prints new lines to clean up console
+            for (int i = 0; i < 50; i++)
+            {
+                System.out.println();
+            }
+        }
     }
 }
