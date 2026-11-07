@@ -6,7 +6,7 @@ import java.util.Scanner;
  * The msin method and controller for the path programmer game
  * 
  * @author Group 7
- * @version 5 Nov 2026
+ * @version 6 Nov 2026
  */
 public class Main
 {
@@ -30,9 +30,9 @@ public class Main
         PLAYER_UP,
         PLAYER_LEFT,
         PLAYER_DOWN,
-        FLOOR,
+        EMPTY,
         WALL,
-        FINISH
+        GOAL
     }
 
     private static String mapdata = "something";

@@ -1,13 +1,12 @@
 package pathprogrammer;
 
 import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *  Tests the Queue class for all behaviors.
+ *  Tests the Queue class for all expected behaviors
  * 
  *  @author Group 7
  *  @version 5 Nov 2026

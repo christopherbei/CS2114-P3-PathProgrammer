@@ -27,7 +27,7 @@ public class Queue<T>
 
     /**
      * @param value
-     *            value to add to the queue
+     *            data to add to the queue
      */
     public void enqueue(T value)
     {
