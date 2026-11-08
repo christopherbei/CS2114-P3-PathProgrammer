@@ -1,18 +1,17 @@
-How to run the model:
+# How to run the model:
 
-How to run the view:
+# How to run the view:
 
-Reflection:
+# Reflection:
+Changes: From the spec, we had the same classes, but changed a few methods and implementations. We had to add a method to check for win conditions in the map class and decided to store the player data as its own tile instead of a variable in the map class. This was due to us not being completely thorough in the spec process and making changes while coding for convenience / efficiency.
 
-[What changed from your specification? Classes, method signatures, where validation lives, test cases — what did the spec say, what did you build instead, and why?]
+Model/View: [Did the model really stand alone? Was there anything you had to move across the model/view line to make it run, or anything in the model that still knows about the view?]
 
-[Did the model really stand alone? Was there anything you had to move across the model/view line to make it run, or anything in the model that still knows about the view?]
+Unknowns: We still have to figure out how to generate random maps and handle real-time input if we want to meet those stretch goals, but are capable of properly using linked chains and displaying custom text into the console.
 
-[What happened to your unknowns? Of the things you listed in your scope as not knowing how to do, which did you figure out, and which are still open?]
+What Doesn't Work: [What doesn't work yet? MVP features, bad-input cases, or tests that are missing or failing.]
 
-[What doesn't work yet? MVP features, bad-input cases, or tests that are missing or failing.]
-
-New Steps: 
+# New Steps: 
 
 [What is left to finish the MVP? The remaining features and fixes, in the order you will do them.]
 
@@ -24,19 +23,19 @@ New Steps:
 
 [Who does what? Which team member owns each remaining item.]
 
-Attribution:
+# Attribution:
 
-main - chris
+Main - Chris
 
-map - blake
+Map - Blake
 
-display - tyler
+Display - Tyler
 
-queue - chris, written manually, used GenAI to debug methods
+Queue - Written by Chris, used GenAI to debug methods
 
-node - chris, written manually
+Node - Written by Chris
 
-GenAI:
+# GenAI:
 
-used to brainstorm and debug methods
+used to debug specific methods
 
