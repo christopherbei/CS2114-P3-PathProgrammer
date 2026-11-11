@@ -116,31 +116,31 @@ public class Map
 
 
     /**
-     * Applies one command. The return value is true when a move is blocked,
+     * Applies one command. The return value is false when a move is blocked,
      * matching the controller's current use of this method. Turns always
      * succeed and moving forward is blocked by map edges and walls.
      *
      * @param move command to apply
-     * @return true if the command was blocked, false if it was applied
+     * @return false if the command was blocked, true if it was applied
      */
     public boolean movePlayer(moves move)
     {
         if (move == null)
         {
-            return true;
+            return false;
         }
 
         if (move == moves.LEFT)
         {
             playerTile = turnLeft(playerTile);
             map[playerRow][playerColumn] = playerTile;
-            return false;
+            return true;
         }
         if (move == moves.RIGHT)
         {
             playerTile = turnRight(playerTile);
             map[playerRow][playerColumn] = playerTile;
-            return false;
+            return true;
         }
 
         int nextRow = playerRow;
@@ -160,13 +160,13 @@ public class Map
                 nextColumn++;
                 break;
             default:
-                return true;
+                return false;
         }
 
         if (nextRow < 0 || nextRow >= rows || nextColumn < 0
             || nextColumn >= columns || map[nextRow][nextColumn] == tiles.WALL)
         {
-            return true;
+            return false;
         }
 
         map[playerRow][playerColumn] = playerRow == goalRow
@@ -174,7 +174,7 @@ public class Map
         playerRow = nextRow;
         playerColumn = nextColumn;
         map[playerRow][playerColumn] = playerTile;
-        return false;
+        return true;
     }
 
 

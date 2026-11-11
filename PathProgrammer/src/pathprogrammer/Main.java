@@ -34,9 +34,9 @@ public class Main
         WALL,
         GOAL
     }
-    
+
     // TODO make a working map data string
-    private static String mapdata = "something";
+    private static String mapdata = "█☐🡢☐✪█";
     private static boolean running = false;
 
     private static Scanner input;
@@ -48,12 +48,13 @@ public class Main
      */
     public static void main(String[] args)
     {
-        System.out.println("                                                                                  \r\n"
-            + " _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ _____ _____ _____ \r\n"
-            + "|  _  |  _  |_   _|  |  |  |  _  | __  |   __| __  |  _  |     |     |   __| __  |\r\n"
-            + "|   __|     | | | |     |  |   __|    -|  |  |    -|     | | | | | | |   __|    -|\r\n"
-            + "|__|  |__|__| |_| |__|__|  |__|  |__|__|_____|__|__|__|__|_|_|_|_|_|_|_____|__|__|\r\n"
-            + "                                                                                  ");
+        System.out.println(
+            "                                                                                  \r\n"
+                + " _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ _____ _____ _____ \r\n"
+                + "|  _  |  _  |_   _|  |  |  |  _  | __  |   __| __  |  _  |     |     |   __| __  |\r\n"
+                + "|   __|     | | | |     |  |   __|    -|  |  |    -|     | | | | | | |   __|    -|\r\n"
+                + "|__|  |__|__| |_| |__|__|  |__|  |__|__|_____|__|__|__|__|_|_|_|_|_|_|_____|__|__|\r\n"
+                + "                                                                                  ");
         System.out.println(
             "use commands 'forward' 'right' and 'left' to set your moves");
         System.out.println(
@@ -74,7 +75,7 @@ public class Main
 
         runCommands();
 
-        if (map.winCondition())
+        if (map.winCondition() && commands.isEmpty())
         {
             System.out.println("congratulations! you win!");
         }
@@ -143,12 +144,7 @@ public class Main
             Display.displayMap(map.getMap());
             Display.displayMoves(commands.toArray(moves.class));
 
-            boolean failed = map.movePlayer(commands.dequeue());
-
-            if (failed)
-            {
-                break;
-            }
+            boolean success = map.movePlayer(commands.peek());
 
             // delays console for one second
             try
@@ -159,11 +155,19 @@ public class Main
             {
                 e.printStackTrace();
             }
-
             // prints new lines to clean up console
             for (int i = 0; i < 50; i++)
             {
                 System.out.println();
+            }
+
+            if (success)
+            {
+                commands.dequeue();
+            }
+            else
+            {
+                break;
             }
         }
     }
