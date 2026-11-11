@@ -4,7 +4,7 @@ Download the game folder and run the Main.java file in eclipse or through a term
 
 ## Reflection:
 ### Changed from our specification:
-From the spec, we had the same classes, but changed a few methods and implementations. We had to add a method to check for win conditions in the map class and decided to store the player data as its own tile instead of a variable in the map class. Also, instead of controlling the player with cardinal directions we chose to have the player turn and move forward to increase the difficulty and complexity of the game. This was due to us not being completely thorough in the spec process and choosing slightly different implementation for convenience / efficiency.
+From the spec, we had the same classes, but changed a few methods and implementations. We had to add a method to check for win conditions in the map class and decided to store the player data as its own tile instead of a variable in the map class. Also, instead of controlling the player with cardinal directions we chose to have the player turn and move forward to increase the difficulty and complexity of the game.
 
 ### Did the model really stand alone:
 Yes, the model really stood alone. Our model classes are not dependent on the view class or do anything relating to the view, so we did not have to move anything across the model/view line.
