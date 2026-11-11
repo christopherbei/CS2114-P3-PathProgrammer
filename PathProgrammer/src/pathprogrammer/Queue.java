@@ -13,6 +13,7 @@ import java.lang.reflect.Array;
 public class Queue<T>
 {
     private Node<T> head;
+    private Node<T> tail;
     private int size;
 
     /**
@@ -21,6 +22,7 @@ public class Queue<T>
     public Queue()
     {
         head = null;
+        tail = null;
         size = 0;
     }
 
@@ -31,20 +33,17 @@ public class Queue<T>
      */
     public void enqueue(T value)
     {
-        Node<T> newNode = new Node<T>(value);
+        Node<T> newNode = new Node<>(value);
 
-        if (head == null)
+        if (tail == null)
         {
             head = newNode;
+            tail = newNode;
         }
         else
         {
-            Node<T> currNode = head;
-            while (currNode.getNext() != null)
-            {
-                currNode = currNode.getNext();
-            }
-            currNode.setNext(newNode);
+            tail.setNext(newNode);
+            tail = newNode;
         }
 
         size++;
@@ -52,22 +51,25 @@ public class Queue<T>
 
 
     /**
-     * Removes the top value from the queue and returns it
+     * removes the top value from the queue and returns it
      * 
      * @return the value of the top element in the queue
-     * @throws RuntimeException
-     *             if the queue is empty
+     * @throws IllegalStateException if the queue is empty
      */
     public T dequeue()
     {
         if (isEmpty())
         {
-            throw new RuntimeException();
+            throw new IllegalStateException("Cannot dequeue an empty queue");
         }
 
         T data = head.getData();
 
         head = head.getNext();
+        if (head == null)
+        {
+            tail = null;
+        }
         size--;
 
         return data;
@@ -75,17 +77,16 @@ public class Queue<T>
 
 
     /**
-     * Returns the top of the queue without modifying it
+     * returns the top of the queue without modifying it
      * 
      * @return the value of the top element in the queue
-     * @throws RuntimeException
-     *             if the queue is empty
+     * @throws IllegalStateException if the queue is empty
      */
     public T peek()
     {
         if (isEmpty())
         {
-            throw new RuntimeException();
+            throw new IllegalStateException("Cannot peek at an empty queue");
         }
 
         return head.getData();
@@ -98,6 +99,7 @@ public class Queue<T>
     public void clear()
     {
         head = null;
+        tail = null;
         size = 0;
     }
 
@@ -108,6 +110,15 @@ public class Queue<T>
     public boolean isEmpty()
     {
         return head == null;
+    }
+
+
+    /**
+     * @return the number of values in the queue
+     */
+    public int size()
+    {
+        return size;
     }
 
 
