@@ -1,6 +1,8 @@
 # How to run the model:
 
+
 # How to run the view:
+
 
 ## Reflection:
 ### Changed from our specification:
@@ -45,5 +47,6 @@ With the addition of interactable tiles, we will have to add tests to check if t
 | NodeTest | Written by Chris |
 
 ### GenAI:
-GenAI was used to debug specific methods
+GenAI was used to debug specific methods.
+
 GenAI was used to format this README file.
