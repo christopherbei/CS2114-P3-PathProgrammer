@@ -7,7 +7,7 @@ import pathprogrammer.Main.tiles;
  * Static displayer class to print map and move enums to the console
  * 
  * @author Group 7
- * @version 7 Nov 2026
+ * @version 10 Nov 2026
  */
 public class Display
 {
@@ -19,7 +19,44 @@ public class Display
      */
     public static void displayMap(tiles[][] map)
     {
-        // TODO
+        if (map == null) {
+            return;
+        }
+
+        System.out.println("--- MAP ---");
+        for (int i = 0; i < map.length; i++) {
+            StringBuilder display = new StringBuilder();
+            for (int j = 0; j < map[i].length; j++) {
+                tiles tile = map[i][j];
+                
+                if (tile == tiles.PLAYER_UP) {
+                    display.append("🡡 ");
+                }
+                else if (tile == tiles.PLAYER_DOWN) {
+                    display.append("🡣 ");
+                }
+                else if (tile == tiles.PLAYER_RIGHT) {
+                    display.append("🡢 ");
+                }
+                else if (tile == tiles.PLAYER_LEFT) {
+                    display.append("🡠 ");
+                }
+                else if (tile == tiles.EMPTY) {
+                    display.append("☐ ");
+                }
+                else if (tile == tiles.WALL) {
+                    display.append("█ ");
+                }
+                else if (tile == tiles.GOAL) {
+                    display.append("✪ ");
+                }
+                else {
+                    display.append("? ");
+                }
+            }
+            System.out.println(display.toString().trim());
+        }
+        System.out.println("-----------");
     }
 
 
@@ -31,6 +68,14 @@ public class Display
      */
     public static void displayMoves(moves[] commands)
     {
-        // TODO
+        System.out.print("Queued Moves: [ ");
+        if (commands != null)
+        {
+            for (int i = 0; i < commands.length; i++)
+            {
+                System.out.print(commands[i] + " ");
+            }
+        }
+        System.out.println("]");
     }
 }
