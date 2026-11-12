@@ -50,6 +50,12 @@ public class Display
                 else if (tile == tiles.GOAL) {
                     display.append("✪ ");
                 }
+                else if (tile == tiles.KEY) {
+                    display.append("🔑 ");
+                }
+                else if (tile == tiles.DOOR) {
+                    display.append("🚪 ");
+                }
                 else {
                     display.append("? ");
                 }

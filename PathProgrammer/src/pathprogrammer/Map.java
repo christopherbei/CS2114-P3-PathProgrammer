@@ -73,6 +73,12 @@ public class Map
                     case 0x2610: // ☐
                         map[row][column] = tiles.EMPTY;
                         break;
+                    case 0x1F511: // 🔑
+                        map[row][column] = tiles.KEY;
+                        break;
+                    case 0x1F6AA: // 🚪
+                        map[row][column] = tiles.DOOR;
+                        break;
                     case 0x272A: // ✪
                         if (foundGoal)
                         {

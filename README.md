@@ -1,4 +1,4 @@
-## How to run the program, both the model and the view:
+## How to run the program:
 Download the game folder and run the Main.java file in eclipse or through a terminal.
 
 
@@ -24,7 +24,7 @@ Which stretch goals are you committing to, and which are you dropping?
 
 
 What will your 3-minute demo show? The path you'll walk through, including the new feature.
-
+Our 3 minute demo will show the user inputting commands that will be invalid commands to show bad input handling. Then the user will put in valid commands, but cause the lose condition to demonstrate the lose condition for the program. Then the user will input the correct commands to interact with the required tiles to successfully meet the win condition.
 
 Who does what? Which team member owns each remaining item.
 
