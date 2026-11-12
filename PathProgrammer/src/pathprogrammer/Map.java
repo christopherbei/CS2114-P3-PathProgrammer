@@ -7,7 +7,7 @@ import pathprogrammer.Main.tiles;
  * Stores and updates the state of a Path Programmer game board.
  *
  * The map is supplied as rows of characters separated by line breaks (or
- * /). Use the same symbols shown by the display: █ for a
+ * /). Use the same symbols shown by the display: ⏹ for a
  * wall, ☐ for an empty tile, ✪ for the goal, and 🡡,
  * 🡣, 🡠, or 🡢 for the player's starting position and
  * direction. Whitespace around rows is ignored.
@@ -67,7 +67,7 @@ public class Map
                 charIndex += Character.charCount(symbol);
                 switch (symbol)
                 {
-                    case 0x2588: // █
+                    case 0x23F9: // ⏹
                         map[row][column] = tiles.WALL;
                         break;
                     case 0x2610: // ☐

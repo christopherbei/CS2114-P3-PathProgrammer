@@ -35,8 +35,19 @@ public class Main
         GOAL
     }
 
-    // TODO make a working map data string
-    private static String mapdata = "█☐🡢☐✪█";
+    private static String mapdata = "⏹⏹⏹⏹⏹⏹⏹⏹⏹⏹⏹⏹\r\n" + //
+                "⏹🡢☐☐⏹☐☐☐⏹☐☐⏹\r\n" + //
+                "⏹⏹⏹☐⏹☐⏹☐⏹⏹☐⏹\r\n" + //
+                "⏹☐☐☐☐☐⏹☐☐☐☐⏹\r\n" + //
+                "⏹☐⏹⏹⏹☐⏹⏹⏹⏹☐⏹\r\n" + //
+                "⏹☐☐☐⏹☐☐⏹☐☐☐⏹\r\n" + //
+                "⏹⏹⏹☐⏹⏹☐☐☐⏹☐⏹\r\n" + //
+                "⏹⏹☐☐☐☐☐⏹⏹⏹⏹⏹\r\n" + //
+                "⏹⏹☐⏹☐⏹⏹☐☐☐☐⏹\r\n" + //
+                "⏹☐☐☐⏹☐☐☐⏹⏹☐⏹\r\n" + //
+                "⏹☐⏹☐☐☐⏹⏹⏹✪☐⏹\r\n" + //
+                "⏹⏹⏹⏹⏹⏹⏹⏹⏹⏹⏹⏹\r\n" + //
+                "";
     private static boolean running = false;
 
     private static Scanner input;
