@@ -13,7 +13,7 @@ Yes, the model really stood alone. Our model classes are not dependent on the vi
 We listed that we didn't know how to add colors to the user interface, we ended up using unicode characters instead of color as we found this made it most readable. We listed how to most efficiently implement a queue in the scenario, we were able to successfully figured this out. We listed what GUI system would we use and how would it be implemented, we have not attempted to implement a GUI yet, so this is still unknown for us. We listed how to create an algorithm that will randomly generate a map, we have not attempted to implement a random maps yet, so this is still unknown for us.    
 
 ### What doesn't work yet:
-The only part that does not work yet is having a more complex map like how we planned. Currently we have a simple placeholder map that demonstrates the program works as intended, but is very simple to complete.
+While we currently have a basic maze map like we planned, we do not have a more complex map that integrates interactive features. Currently we have a simple map that demonstrates the program works as intended, with features such as moving forward, turning, and reaching the goal. We also have considered adding map generation.
 
 ## New Steps: 
 ### What is left to finish the MVP:
