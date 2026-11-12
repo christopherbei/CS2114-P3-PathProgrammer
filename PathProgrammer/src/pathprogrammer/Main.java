@@ -49,12 +49,10 @@ public class Main
                 "■■■■■■■■■■■■\r\n" + //
                 "";
     private static boolean running = false;
-    private static boolean gui;
 
     private static Scanner input;
     private static Map map;
     private static Queue<moves> commands;
-    private static GraphicDisplay GUI;
 
     /**
      * the initial method and main loop for the program to run
@@ -78,41 +76,14 @@ public class Main
         map = new Map(mapdata);
         commands = new Queue<>();
 
-<<<<<<< Updated upstream
         while (!running)
         {
             Display.displayMap(map.getMap());
             Display.displayMoves(commands.toArray(moves.class));
-=======
-        // takes user input to decide what display format to use
-        System.out.print("display format (gui or terminal): ");
-        String preference = input.nextLine();
-        while (!preference.equals("gui") && !preference.equals("terminal")) {
-            System.out.print("not recognized, try again: ");
-            preference = input.nextLine();
-        }
-        
-        gui = (preference.equals("gui"));
-        if (gui) {
-            GUI = new GraphicDisplay(map.getMap());
-        }
-        System.out.println();
-
-        // main game loop
-        while (!running)
-        {
-            System.out.println(
-                "use commands 'forward' 'right' and 'left' to set your moves");
-            System.out.println(
-                "type 'run' to play through your commands and 'quit' to stop the program");
-
-            callDisplay();
->>>>>>> Stashed changes
 
             validateInput();
         }
 
-        // end game logic
         runCommands();
 
         if (map.winCondition() && commands.isEmpty())
@@ -124,19 +95,7 @@ public class Main
             System.out.println("you lost... try again?");
         }
 
-        callDisplay();
-    }
-    
-    /**
-     * displays the map in the user's chosen format
-     */
-    public static void callDisplay() {
-        if (gui) {
-            System.out.println();
-            GUI.displayMap(map.getMap());
-        }else {
-            Display.displayMap(map.getMap());
-        }
+        Display.displayMap(map.getMap());
         Display.displayMoves(commands.toArray(moves.class));
     }
 
@@ -209,7 +168,8 @@ public class Main
     {
         while (!commands.isEmpty())
         {
-            callDisplay();
+            Display.displayMap(map.getMap());
+            Display.displayMoves(commands.toArray(moves.class));
 
             boolean success = map.movePlayer(commands.peek());
 
