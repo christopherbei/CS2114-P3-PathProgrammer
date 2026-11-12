@@ -45,7 +45,7 @@ public class Display
                     display.append("☐ ");
                 }
                 else if (tile == tiles.WALL) {
-                    display.append("⏹ ");
+                    display.append("■ ");
                 }
                 else if (tile == tiles.GOAL) {
                     display.append("✪ ");
