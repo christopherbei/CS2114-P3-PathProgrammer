@@ -121,14 +121,26 @@ public class Main
         {
             case "forward":
                 commands.enqueue(moves.FORWARD);
+                System.out.println(
+                    "use commands 'forward' 'right' and 'left' to set your moves");
+                System.out.println(
+                    "type 'run' to play through your commands and 'quit' to stop the program");
                 System.out.println("command added.");
                 break;
             case "left":
                 commands.enqueue(moves.LEFT);
+                System.out.println(
+                    "use commands 'forward' 'right' and 'left' to set your moves");
+                System.out.println(
+                    "type 'run' to play through your commands and 'quit' to stop the program");
                 System.out.println("command added.");
                 break;
             case "right":
                 commands.enqueue(moves.RIGHT);
+                System.out.println(
+                    "use commands 'forward' 'right' and 'left' to set your moves");
+                System.out.println(
+                    "type 'run' to play through your commands and 'quit' to stop the program");
                 System.out.println("command added.");
                 break;
             case "run":
@@ -139,6 +151,10 @@ public class Main
                 System.out.println("quitting...");
                 System.exit(0);
             default:
+                System.out.println(
+                    "use commands 'forward' 'right' and 'left' to set your moves");
+                System.out.println(
+                    "type 'run' to play through your commands and 'quit' to stop the program");
                 System.out.println("command not recognized, try again.");
                 break;
         }
