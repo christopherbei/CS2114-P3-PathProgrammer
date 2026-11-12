@@ -37,7 +37,7 @@ Blake is going to implement the more complex map. Tyler is going to work on impl
 | Class / File | Contribution / Role |
 | :--- | :--- |
 | Main | Written by Chris |
-| Map | Written by Blake |
+| Map | Written by Blake, debugged with Codex |
 | Display | Written by Tyler |
 | Queue | Written by Chris, GenAI debugged methods |
 | QueueTest | Written by Chris |
