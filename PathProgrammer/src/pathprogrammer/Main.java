@@ -66,18 +66,22 @@ public class Main
                 + "|   __|     | | | |     |  |   __|    -|  |  |    -|     | | | | | | |   __|    -|\r\n"
                 + "|__|  |__|__| |_| |__|__|  |__|  |__|__|_____|__|__|__|__|_|_|_|_|_|_|_____|__|__|\r\n"
                 + "                                                                                  ");
-        System.out.println(
-            "use commands 'forward' 'right' and 'left' to set your moves");
-        System.out.println(
-            "type 'run' to play through your commands and 'quit' to stop the program");
         System.out.println();
 
         input = new Scanner(System.in);
         map = new Map(mapdata);
         commands = new Queue<>();
 
+        // TODO
+        // user input for gui or terminal
+
         while (!running)
         {
+            System.out.println(
+                "use commands 'forward' 'right' and 'left' to set your moves");
+            System.out.println(
+                "type 'run' to play through your commands and 'quit' to stop the program");
+
             Display.displayMap(map.getMap());
             Display.displayMoves(commands.toArray(moves.class));
 
