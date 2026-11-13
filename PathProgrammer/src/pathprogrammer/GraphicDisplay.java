@@ -6,16 +6,23 @@ import java.awt.*;
 
 public class GraphicDisplay
 {
+    private final int SCALE = 25;
+
     private class DrawComponent
-        extends JComponent
+        extends JPanel
     {
-        public void paintComponent(Graphics g, int x, int y, int w, int h)
-        {
-            super.paintComponent(g);
+        public void clear() {
+            Graphics g = frame.getGraphics();
+            Graphics2D g2 = (Graphics2D) g;
             
+            g2.setPaint(Color.GRAY);
+            g2.fillRect(0, 0, frame.getWidth(), frame.getHeight());
+        }
+        
+        public void paint(Graphics g, int x, int y, int w, int h)
+        {
             Graphics2D g2 = (Graphics2D) g;
             g2.setPaint(Color.BLACK);
-            g2.drawRect(x, y, w, h);
             g2.fillRect(x, y, w, h);
         }
     }
@@ -42,7 +49,7 @@ public class GraphicDisplay
         frame.setLocationRelativeTo(null);
         frame.setAlwaysOnTop(true);
         frame.setVisible(true);
-        
+
         draw = new DrawComponent();
         frame.add(draw);
 
@@ -55,7 +62,17 @@ public class GraphicDisplay
      */
     public void displayMap(tiles[][] map)
     {
-        // TODO clear stuff if needed
+        draw.clear();
+        
+        try
+        {
+            Thread.sleep(10);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+        
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -72,15 +89,34 @@ public class GraphicDisplay
     private void displayTile(tiles tile, int x, int y)
     {
         Graphics g = frame.getGraphics();
+
+        int leftBuffer = (frame.getWidth() - width * SCALE) / 2;
+        int topBuffer = (frame.getHeight() + 25 - height * SCALE) / 2;
         
-        if (tile == tiles.WALL)
+        int xPos = leftBuffer + x * SCALE;
+        int yPos = topBuffer + y * SCALE;
+        int width = SCALE;
+        int height = SCALE;
+
+        if (tile == tiles.EMPTY)
         {
-            draw.paintComponent(g, x, y, 1, 1);
+            return;
         }
-        else
+        else if (tile == tiles.GOAL)
         {
-            // TODO
+            xPos += 4;
+            yPos += 4;
+            width -= 8;
+            height -= 8;
         }
+        else if (tile != tiles.WALL) {
+            xPos += 2;
+            yPos += 2;
+            width -= 4;
+            height -= 4;
+        }
+
+        draw.paint(g, xPos, yPos, width, height);
     }
 
 }

@@ -61,6 +61,7 @@ public class Main
      */
     public static void main(String[] args)
     {
+        // title and setup
         System.out.println(
             "                                                                                  \r\n"
                 + " _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ _____ _____ _____ \r\n"
@@ -183,27 +184,34 @@ public class Main
      */
     private static void runCommands()
     {
+        int moves = 0;
+        int speedup = 0;
+        
         while (!commands.isEmpty())
         {
+            // display map
             callDisplay();
 
+            // try moving player
             boolean success = map.movePlayer(commands.peek());
 
             // delays console for one second
             try
             {
-                Thread.sleep(1000);
+                Thread.sleep(1000 - speedup);
             }
             catch (InterruptedException e)
             {
                 e.printStackTrace();
             }
+
             // prints new lines to clean up console
             for (int i = 0; i < 50; i++)
             {
                 System.out.println();
             }
 
+            // updates queue if player moved, ends loop if the move failed
             if (success)
             {
                 commands.dequeue();
@@ -211,6 +219,12 @@ public class Main
             else
             {
                 break;
+            }
+            
+            // speeds up the loop as it goes on
+            moves++;
+            if (moves > 5) {
+                speedup = 200;
             }
         }
     }
