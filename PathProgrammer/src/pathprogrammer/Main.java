@@ -26,10 +26,10 @@ public class Main
      */
     public static enum tiles
     {
-        PLAYER_RIGHT,
         PLAYER_UP,
-        PLAYER_LEFT,
         PLAYER_DOWN,
+        PLAYER_LEFT,
+        PLAYER_RIGHT,
         EMPTY,
         WALL,
         GOAL
