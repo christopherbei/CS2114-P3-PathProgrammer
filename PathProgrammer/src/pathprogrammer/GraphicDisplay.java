@@ -20,11 +20,25 @@ public class GraphicDisplay
         }
 
 
-        public void draw(Graphics g, int x, int y, int w, int h, Color color)
+        /**
+         * draws a square to the panel
+         */
+        public void draw(Graphics g, int x, int y, int size, Color color)
         {
             Graphics2D g2 = (Graphics2D)g;
             g2.setPaint(color);
-            g2.fillRect(x, y, w, h);
+            g2.fillRect(x, y, size, size);
+        }
+
+
+        /**
+         * draws a triangle to the panel
+         */
+        public void draw(Graphics g, int[] x, int[] y, Color color)
+        {
+            Graphics2D g2 = (Graphics2D)g;
+            g2.setPaint(color);
+            g2.fillPolygon(x, y, x.length);
         }
     }
 
@@ -106,61 +120,75 @@ public class GraphicDisplay
         int size = SCALE;
         Color color = Color.BLACK;
 
-        if (tile == tiles.GOAL) // altered values for goal tile
+        if (tile == tiles.WALL)
+        {
+            gui.draw(g, xPos, yPos, size, color);
+        }
+        else if (tile == tiles.GOAL) // altered values for goal tile
         {
             xPos += 4;
             yPos += 4;
             size -= 8;
             color = Color.YELLOW;
+
+            gui.draw(g, xPos, yPos, size, color);
         }
-        else if (tile != tiles.WALL) // altered values for player tile
+        else if (tile == tiles.KEY)
+        {
+            xPos += 4;
+            yPos += 4;
+            size -= 8;
+            color = Color.GREEN;
+
+            gui.draw(g, xPos, yPos, size, color);
+        }
+        else if (tile == tiles.DOOR)
+        {
+            color = Color.GREEN;
+
+            gui.draw(g, xPos, yPos, size, color);
+        }
+        else // altered values for player tile
         {
             xPos += 2;
             yPos += 2;
             size -= 4;
             color = Color.BLUE;
 
+            int[] xPoints = null;
+            int[] yPoints = null;
             switch (tile)
-            { // player direction pointer TODO (make fit better in walls)
+            { // player direction pointer
                 case PLAYER_UP:
-                    gui.draw(
-                        g,
-                        xPos + size / 4,
-                        yPos - size / 2,
-                        size / 2,
-                        size / 2,
-                        color);
+                    xPoints = new int[] { xPos + size * 1 / 4,
+                        xPos + size * 2 / 4, xPos + size * 3 / 4 };
+                    yPoints = new int[] { yPos + size * 3 / 4,
+                        yPos + size * 1 / 4, yPos + size * 3 / 4 };
                     break;
                 case PLAYER_DOWN:
-                    gui.draw(
-                        g,
-                        xPos + size / 4,
-                        yPos + size,
-                        size / 2,
-                        size / 2,
-                        color);
+                    xPoints = new int[] { xPos + size * 1 / 4,
+                        xPos + size * 2 / 4, xPos + size * 3 / 4 };
+                    yPoints = new int[] { yPos + size * 1 / 4,
+                        yPos + size * 3 / 4, yPos + size * 1 / 4 };
                     break;
                 case PLAYER_LEFT:
-                    gui.draw(
-                        g,
-                        xPos - size / 2,
-                        yPos + size / 4,
-                        size / 2,
-                        size / 2,
-                        color);
+                    xPoints = new int[] { xPos + size * 3 / 4,
+                        xPos + size * 1 / 4, xPos + size * 3 / 4 };
+                    yPoints = new int[] { yPos + size * 1 / 4,
+                        yPos + size * 2 / 4, yPos + size * 3 / 4 };
                     break;
                 case PLAYER_RIGHT:
-                    gui.draw(
-                        g,
-                        xPos + size,
-                        yPos + size / 4,
-                        size / 2,
-                        size / 2,
-                        color);
+                    xPoints = new int[] { xPos + size * 1 / 4,
+                        xPos + size * 3 / 4, xPos + size * 1 / 4 };
+                    yPoints = new int[] { yPos + size * 1 / 4,
+                        yPos + size * 2 / 4, yPos + size * 3 / 4 };
+                    break;
             }
+
+            gui.draw(g, xPos, yPos, size, color);
+            gui.draw(g, xPoints, yPoints, Color.CYAN);
         }
 
-        gui.draw(g, xPos, yPos, size, size, color);
     }
 
 }

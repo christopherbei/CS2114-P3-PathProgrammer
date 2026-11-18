@@ -38,18 +38,18 @@ public class Main
     }
 
     private static String mapdata = "■■■■■■■■■■■■\r\n" + //
-                "■🡢☐☐■☐☐☐■☐☐■\r\n" + //
-                "■■■☐■☐■☐■■☐■\r\n" + //
-                "■☐☐☐☐🔑■☐☐☐☐■\r\n" + //
-                "■☐■■■☐■■■■☐■\r\n" + //
-                "■☐☐☐■☐☐■☐☐☐■\r\n" + //
-                "■■■☐■■☐☐☐■☐■\r\n" + //
-                "■■☐☐☐☐☐■■■■■\r\n" + //
-                "■■☐■☐■■☐🚪☐☐■\r\n" + //
-                "■☐☐☐■☐☐☐■■☐■\r\n" + //
-                "■☐■☐☐☐■■■✪☐■\r\n" + //
-                "■■■■■■■■■■■■\r\n" + //
-                "";
+        "■🡢☐☐■☐☐☐■☐☐■\r\n" + //
+        "■■■☐■☐■☐■■☐■\r\n" + //
+        "■☐☐☐☐🔑■☐☐☐☐■\r\n" + //
+        "■☐■■■☐■■■■☐■\r\n" + //
+        "■☐☐☐■☐☐■☐☐☐■\r\n" + //
+        "■■■☐■■☐☐☐■☐■\r\n" + //
+        "■■☐☐☐☐☐■■■■■\r\n" + //
+        "■■☐■☐■■☐🚪☐☐■\r\n" + //
+        "■☐☐☐■☐☐☐■■☐■\r\n" + //
+        "■☐■☐☐☐■■■✪☐■\r\n" + //
+        "■■■■■■■■■■■■\r\n" + //
+        "";
     private static boolean running = false;
     private static boolean gui;
 
@@ -159,12 +159,15 @@ public class Main
         switch (command)
         {
             case "forward":
+            case "f":
                 commands.enqueue(moves.FORWARD);
                 break;
             case "left":
+            case "l":
                 commands.enqueue(moves.LEFT);
                 break;
             case "right":
+            case "r":
                 commands.enqueue(moves.RIGHT);
                 break;
             case "run":
@@ -188,7 +191,7 @@ public class Main
     {
         int moves = 0;
         int speedup = 0;
-        
+
         while (!commands.isEmpty())
         {
             // display map
@@ -200,7 +203,7 @@ public class Main
             // delays console for one second
             try
             {
-                Thread.sleep(1000 - speedup);
+                Thread.sleep(800 - speedup);
             }
             catch (InterruptedException e)
             {
@@ -222,10 +225,15 @@ public class Main
             {
                 break;
             }
-            
+
             // speeds up the loop as it goes on
             moves++;
-            if (moves > 5) {
+            if (moves > 10)
+            {
+                speedup = 400;
+            }
+            else if (moves > 5)
+            {
                 speedup = 200;
             }
         }
