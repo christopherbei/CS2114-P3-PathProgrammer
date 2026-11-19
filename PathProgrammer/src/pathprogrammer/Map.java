@@ -19,11 +19,12 @@ public class Map
     private final tiles[][] map;
     private final int rows;
     private final int columns;
+    private int goalRow;
+    private int goalColumn;
+
     private int playerRow;
     private int playerColumn;
     private tiles playerTile;
-    private int goalRow;
-    private int goalColumn;
     private int keyCount = 0;
 
     private static HashMap<tiles, tiles> turnRight = new HashMap<>();
@@ -183,27 +184,27 @@ public class Map
         if (nextRow < 0 || nextRow >= rows || nextColumn < 0
             || nextColumn >= columns || map[nextRow][nextColumn] == tiles.WALL)
         {
-            return false;
+            return false; // if player tries to move outside map
         }
 
         if (map[nextRow][nextColumn] == tiles.DOOR && keyCount <= 0)
         {
-            return false;
+            return false; // if the player doesn't have a key for the door
         }
         else if (map[nextRow][nextColumn] == tiles.DOOR && keyCount > 0)
         {
-            keyCount--;
+            keyCount--; // the player uses a key
         }
 
         if (map[nextRow][nextColumn] == tiles.KEY)
         {
-            keyCount++;
+            keyCount++; // the player picks up a key
         }
 
         map[playerRow][playerColumn] =
             playerRow == goalRow && playerColumn == goalColumn
                 ? tiles.GOAL
-                : tiles.EMPTY;
+                : tiles.EMPTY; // replaces the tile behind player
         playerRow = nextRow;
         playerColumn = nextColumn;
         map[playerRow][playerColumn] = playerTile;

@@ -40,6 +40,22 @@ public class GraphicDisplay
             g2.setPaint(color);
             g2.fillPolygon(x, y, x.length);
         }
+
+
+        /**
+         * draws text to the panel, aligned to the center horizontally
+         */
+        public void draw(Graphics g, int y, String text, Color color)
+        {
+            Font font = new Font("Monospaced", Font.BOLD, 40);
+            FontMetrics metrics = g.getFontMetrics(font);
+            int textWidth = metrics.stringWidth(text);
+
+            Graphics2D g2 = (Graphics2D)g;
+            g2.setPaint(color);
+            g2.setFont(font);
+            g2.drawString(text, (frame.getWidth() - textWidth) / 2, y);
+        }
     }
 
     private final int SCALE = 25;
@@ -80,11 +96,31 @@ public class GraphicDisplay
 
 
     /**
-     * edits the display to show the current map
+     * overloaded display function
      */
     public void displayMap(tiles[][] map)
     {
+        displayMap(map, "");
+    }
+
+
+    /**
+     * edits the display to show the current map
+     */
+    public void displayMap(tiles[][] map, String message)
+    {
         gui.clear();
+
+        gui.draw(
+            frame.getGraphics(),
+            (int)(frame.getHeight() * 0.2),
+            "PATH PROGRAMMER",
+            Color.BLACK);
+        gui.draw(
+            frame.getGraphics(),
+            (int)(frame.getHeight() * 0.9),
+            message,
+            Color.RED);
 
         try
         {

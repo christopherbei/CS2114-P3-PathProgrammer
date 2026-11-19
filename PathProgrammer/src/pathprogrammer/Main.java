@@ -104,7 +104,7 @@ public class Main
             System.out.println(
                 "type 'run' to play through your commands and 'quit' to stop the program");
 
-            callDisplay();
+            callDisplay(""); 
 
             validateInput();
         }
@@ -115,25 +115,26 @@ public class Main
         if (map.winCondition() && commands.isEmpty())
         {
             System.out.println("congratulations! you win!");
+            callDisplay("You Win!");
         }
         else
         {
             System.out.println("you lost... try again?");
+            callDisplay("You lose...");
         }
 
-        callDisplay();
     }
 
 
     /**
      * calls the display methods for the chosen display type
      */
-    private static void callDisplay()
+    private static void callDisplay(String message)
     {
         if (gui)
         {
             System.out.println();
-            GUI.displayMap(map.getMap());
+            GUI.displayMap(map.getMap(), message);
         }
         else
         {
@@ -199,7 +200,7 @@ public class Main
         while (!commands.isEmpty())
         {
             // display map
-            callDisplay();
+            callDisplay("");
 
             // try moving player
             boolean success = map.movePlayer(commands.peek());
