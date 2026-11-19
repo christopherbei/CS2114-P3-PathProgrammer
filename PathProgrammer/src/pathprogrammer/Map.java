@@ -25,6 +25,7 @@ public class Map
     private tiles playerTile;
     private int goalRow;
     private int goalColumn;
+    private boolean keyObtained = false;
 
     /**
      * Creates a map from a rectangular text grid.
@@ -175,6 +176,16 @@ public class Map
             return false;
         }
 
+        if (map[nextRow][nextColumn] == tiles.DOOR && !keyObtained)
+        {
+            return false; 
+        }
+        
+        if (map[nextRow][nextColumn] == tiles.KEY)
+        {
+            keyObtained = true;
+        }
+        
         map[playerRow][playerColumn] = playerRow == goalRow
             && playerColumn == goalColumn ? tiles.GOAL : tiles.EMPTY;
         playerRow = nextRow;

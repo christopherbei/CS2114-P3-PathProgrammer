@@ -37,6 +37,7 @@ Who does what? Which team member owns each remaining item.
 | Main | Written by Chris |
 | Map | Written by Blake, debugged with Codex |
 | Display | Written by Tyler |
+| GraphicDisplay | Written by Chris|
 | Queue | Written by Chris, GenAI debugged methods |
 | QueueTest | Written by Chris |
 | Node | Written by Chris |
