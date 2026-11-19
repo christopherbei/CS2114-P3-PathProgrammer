@@ -104,7 +104,7 @@ public class Main
             System.out.println(
                 "type 'run' to play through your commands and 'quit' to stop the program");
 
-            callDisplay(""); 
+            callDisplay("");
 
             validateInput();
         }
