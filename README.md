@@ -13,7 +13,7 @@ Did the change cross the model/view line? Did the view have to learn anything ne
 
 What changed from your D3 plan? Features, signatures, validation, or tests that differ from what you said you'd do, and why.
 
-
+Nothing changed from our D3 plan, as we planned to add a more complex map with a GUi option and an interactive element. We have both a functioning GUI, and we added a lock and key feature. One thing that did change was that we updated the input to allow quicky commands such as "f" for forward, "r" for right, and "l" for left. Everything else was left untouched and still works as intended.
 
 
 What doesn't work yet? MVP features, bad-input cases, or tests that are missing or failing.
