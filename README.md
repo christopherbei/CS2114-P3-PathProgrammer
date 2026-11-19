@@ -14,23 +14,32 @@ Did the change cross the model/view line? Did the view have to learn anything ne
 What changed from your D3 plan? Features, signatures, validation, or tests that differ from what you said you'd do, and why.
 
 
+
+
 What doesn't work yet? MVP features, bad-input cases, or tests that are missing or failing.
+
 All MVP features, bad-input cases, and tests work.
 
 
 ## New Steps: 
 What is left for the final build? Remaining features and fixes, in order.
+
 There are no remaining features for the final build (other than our stretch goal of random map generation, which we will not be adding). The overall look of the GUI could be improved with symbols and effects.
 
+
 Which stretch goals are you committing to, and which are you dropping?
-The stretch goals we committed to was creating a GUI and implementing interactive elements. The GUI can be modified to include symbols for the player, goal, key, and door. Along with that, more interactive elements can always be added. We dropped the stretch goal of generating random maps because it is too difficult to write the logical for creating maps that are designed fairly and would be fun to play.
+
+The stretch goals we committed to was creating a GUI and implementing interactive elements such as a key and door. The GUI can be modified to include symbols for the player, goal, key, and door. Along with that, more interactive elements can always be added. We dropped the stretch goal of generating random maps because it is too difficult to write the logical for creating maps that are designed fairly and would be fun to play.
+
 
 What will your 3-minute demo show? The path you'll walk through, including the new feature.
+
 Our 3 minute demo will show the user inputting commands that will be invalid commands to show bad input handling. Then the user will put in valid commands, but cause the lose condition to demonstrate the lose condition for the program. Then the user will input the correct commands to interact with the required tiles to successfully meet the win condition.
+
 
 Who does what? Which team member owns each remaining item.
 
-
+Becuase there are no remaining items, we can meet as a team and decide if there's anything we want to improve/add.
 
 ## Attribution: 
 
