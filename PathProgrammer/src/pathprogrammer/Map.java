@@ -2,15 +2,14 @@ package pathprogrammer;
 
 import pathprogrammer.Main.moves;
 import pathprogrammer.Main.tiles;
+import java.util.HashMap;
 
 /**
- * Stores and updates the state of a Path Programmer game board.
- *
- * The map is supplied as rows of characters separated by line breaks (or
- * /). Use the same symbols shown by the display: ■ for a
- * wall, ☐ for an empty tile, ✪ for the goal, and 🡡,
- * 🡣, 🡠, or 🡢 for the player's starting position and
- * direction. Whitespace around rows is ignored.
+ * Stores and updates the state of a Path Programmer game board. The map is
+ * supplied as rows of characters separated by line breaks (or /). Use the same
+ * symbols shown by the display: ■ for a wall, ☐ for an empty tile, ✪ for the
+ * goal, and 🡡, 🡣, 🡠, or 🡢 for the player's starting position and direction.
+ * Whitespace around rows is ignored.
  *
  * @author Group 7
  * @version 10 Nov 2026
@@ -25,14 +24,33 @@ public class Map
     private tiles playerTile;
     private int goalRow;
     private int goalColumn;
-    private boolean keyObtained = false;
+    private int keyCount = 0;
+
+    private static HashMap<tiles, tiles> turnLeft = new HashMap<>();
+    static
+    {
+        turnLeft.put(tiles.PLAYER_UP, tiles.PLAYER_RIGHT);
+        turnLeft.put(tiles.PLAYER_RIGHT, tiles.PLAYER_DOWN);
+        turnLeft.put(tiles.PLAYER_DOWN, tiles.PLAYER_LEFT);
+        turnLeft.put(tiles.PLAYER_LEFT, tiles.PLAYER_UP);
+    }
+
+    private static HashMap<tiles, tiles> turnRight = new HashMap<>();
+    static
+    {
+        turnRight.put(tiles.PLAYER_UP, tiles.PLAYER_LEFT);
+        turnRight.put(tiles.PLAYER_LEFT, tiles.PLAYER_DOWN);
+        turnRight.put(tiles.PLAYER_DOWN, tiles.PLAYER_RIGHT);
+        turnRight.put(tiles.PLAYER_RIGHT, tiles.PLAYER_UP);
+    }
 
     /**
      * Creates a map from a rectangular text grid.
      *
-     * @param data textual map with one player and one goal
-     * @throws IllegalArgumentException if the map is null, malformed, or
-     *         missing its player or goal
+     * @param data
+     *            textual map with one player and one goal
+     * @throws IllegalArgumentException
+     *             if the map is null, malformed, or missing its player or goal
      */
     public Map(String data)
     {
@@ -43,15 +61,16 @@ public class Map
 
         String[] mapRows = data.trim().split("(?:\\r?\\n|/)");
         rows = mapRows.length;
-        columns = mapRows[0].trim().codePointCount(0, mapRows[0].trim().length());
+        columns =
+            mapRows[0].trim().codePointCount(0, mapRows[0].trim().length());
         if (columns == 0)
         {
             throw new IllegalArgumentException("Map rows must not be empty");
         }
 
         map = new tiles[rows][columns];
-        boolean foundPlayer = false;
-        boolean foundGoal = false;
+        int playerCount = 0;
+        int goalCount = 0;
         for (int row = 0; row < rows; row++)
         {
             String line = mapRows[row].trim();
@@ -81,30 +100,20 @@ public class Map
                         map[row][column] = tiles.DOOR;
                         break;
                     case 0x272A: // ✪
-                        if (foundGoal)
-                        {
-                            throw new IllegalArgumentException(
-                                "Map must contain exactly one goal");
-                        }
-                        foundGoal = true;
+                        map[row][column] = tiles.GOAL;
+                        goalCount++;
                         goalRow = row;
                         goalColumn = column;
-                        map[row][column] = tiles.GOAL;
                         break;
                     case 0x1F861: // 🡡
                     case 0x1F863: // 🡣
                     case 0x1F860: // 🡠
                     case 0x1F862: // 🡢
-                        if (foundPlayer)
-                        {
-                            throw new IllegalArgumentException(
-                                "Map must contain exactly one player");
-                        }
-                        foundPlayer = true;
-                        playerRow = row;
-                        playerColumn = column;
                         playerTile = directionTile(symbol);
                         map[row][column] = playerTile;
+                        playerCount++;
+                        playerRow = row;
+                        playerColumn = column;
                         break;
                     default:
                         throw new IllegalArgumentException(
@@ -114,7 +123,7 @@ public class Map
             }
         }
 
-        if (!foundPlayer || !foundGoal)
+        if (playerCount != 1 || goalCount != 1)
         {
             throw new IllegalArgumentException(
                 "Map must contain exactly one player and one goal");
@@ -127,7 +136,8 @@ public class Map
      * matching the controller's current use of this method. Turns always
      * succeed and moving forward is blocked by map edges and walls.
      *
-     * @param move command to apply
+     * @param move
+     *            command to apply
      * @return false if the command was blocked, true if it was applied
      */
     public boolean movePlayer(moves move)
@@ -139,13 +149,13 @@ public class Map
 
         if (move == moves.LEFT)
         {
-            playerTile = turnLeft(playerTile);
+            playerTile = turnLeft.get(playerTile);
             map[playerRow][playerColumn] = playerTile;
             return true;
         }
         if (move == moves.RIGHT)
         {
-            playerTile = turnRight(playerTile);
+            playerTile = turnRight.get(playerTile);
             map[playerRow][playerColumn] = playerTile;
             return true;
         }
@@ -176,18 +186,24 @@ public class Map
             return false;
         }
 
-        if (map[nextRow][nextColumn] == tiles.DOOR && !keyObtained)
+        if (map[nextRow][nextColumn] == tiles.DOOR && keyCount <= 0)
         {
-            return false; 
+            return false;
         }
-        
+        else if (map[nextRow][nextColumn] == tiles.DOOR && keyCount > 0)
+        {
+            keyCount--;
+        }
+
         if (map[nextRow][nextColumn] == tiles.KEY)
         {
-            keyObtained = true;
+            keyCount++;
         }
-        
-        map[playerRow][playerColumn] = playerRow == goalRow
-            && playerColumn == goalColumn ? tiles.GOAL : tiles.EMPTY;
+
+        map[playerRow][playerColumn] =
+            playerRow == goalRow && playerColumn == goalColumn
+                ? tiles.GOAL
+                : tiles.EMPTY;
         playerRow = nextRow;
         playerColumn = nextColumn;
         map[playerRow][playerColumn] = playerTile;
@@ -226,34 +242,14 @@ public class Map
     {
         switch (symbol)
         {
-            case 0x1F861: return tiles.PLAYER_UP;
-            case 0x1F863: return tiles.PLAYER_DOWN;
-            case 0x1F860: return tiles.PLAYER_LEFT;
-            default: return tiles.PLAYER_RIGHT;
-        }
-    }
-
-
-    private static tiles turnLeft(tiles direction)
-    {
-        switch (direction)
-        {
-            case PLAYER_UP: return tiles.PLAYER_LEFT;
-            case PLAYER_LEFT: return tiles.PLAYER_DOWN;
-            case PLAYER_DOWN: return tiles.PLAYER_RIGHT;
-            default: return tiles.PLAYER_UP;
-        }
-    }
-
-
-    private static tiles turnRight(tiles direction)
-    {
-        switch (direction)
-        {
-            case PLAYER_UP: return tiles.PLAYER_RIGHT;
-            case PLAYER_RIGHT: return tiles.PLAYER_DOWN;
-            case PLAYER_DOWN: return tiles.PLAYER_LEFT;
-            default: return tiles.PLAYER_UP;
+            case 0x1F861:
+                return tiles.PLAYER_UP;
+            case 0x1F863:
+                return tiles.PLAYER_DOWN;
+            case 0x1F860:
+                return tiles.PLAYER_LEFT;
+            default:
+                return tiles.PLAYER_RIGHT;
         }
     }
 }

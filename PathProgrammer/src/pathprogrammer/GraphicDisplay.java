@@ -120,73 +120,73 @@ public class GraphicDisplay
         int size = SCALE;
         Color color = Color.BLACK;
 
-        if (tile == tiles.WALL)
-        {
-            gui.draw(g, xPos, yPos, size, color);
-        }
-        else if (tile == tiles.GOAL) // altered values for goal tile
-        {
-            xPos += 4;
-            yPos += 4;
-            size -= 8;
-            color = Color.YELLOW;
-
-            gui.draw(g, xPos, yPos, size, color);
-        }
-        else if (tile == tiles.KEY)
-        {
-            xPos += 4;
-            yPos += 4;
-            size -= 8;
-            color = Color.GREEN;
-
-            gui.draw(g, xPos, yPos, size, color);
-        }
-        else if (tile == tiles.DOOR)
-        {
-            color = Color.GREEN;
-
-            gui.draw(g, xPos, yPos, size, color);
-        }
-        else // altered values for player tile
-        {
-            xPos += 2;
-            yPos += 2;
-            size -= 4;
-            color = Color.BLUE;
-
-            int[] xPoints = null;
-            int[] yPoints = null;
-            switch (tile)
-            { // player direction pointer
-                case PLAYER_UP:
-                    xPoints = new int[] { xPos + size * 1 / 4,
-                        xPos + size * 2 / 4, xPos + size * 3 / 4 };
-                    yPoints = new int[] { yPos + size * 3 / 4,
-                        yPos + size * 1 / 4, yPos + size * 3 / 4 };
-                    break;
-                case PLAYER_DOWN:
-                    xPoints = new int[] { xPos + size * 1 / 4,
-                        xPos + size * 2 / 4, xPos + size * 3 / 4 };
-                    yPoints = new int[] { yPos + size * 1 / 4,
-                        yPos + size * 3 / 4, yPos + size * 1 / 4 };
-                    break;
-                case PLAYER_LEFT:
-                    xPoints = new int[] { xPos + size * 3 / 4,
-                        xPos + size * 1 / 4, xPos + size * 3 / 4 };
-                    yPoints = new int[] { yPos + size * 1 / 4,
-                        yPos + size * 2 / 4, yPos + size * 3 / 4 };
-                    break;
-                case PLAYER_RIGHT:
-                    xPoints = new int[] { xPos + size * 1 / 4,
-                        xPos + size * 3 / 4, xPos + size * 1 / 4 };
-                    yPoints = new int[] { yPos + size * 1 / 4,
-                        yPos + size * 2 / 4, yPos + size * 3 / 4 };
-                    break;
-            }
-
-            gui.draw(g, xPos, yPos, size, color);
-            gui.draw(g, xPoints, yPoints, Color.CYAN);
+        switch(tile) {
+            case WALL:
+                gui.draw(g, xPos, yPos, size, color);
+                break;
+            case GOAL:
+                xPos += 4;
+                yPos += 4;
+                size -= 8;
+                color = Color.YELLOW;
+    
+                gui.draw(g, xPos, yPos, size, color);
+                break;
+            case KEY:
+                xPos += 4;
+                yPos += 4;
+                size -= 8;
+                color = Color.GREEN;
+    
+                gui.draw(g, xPos, yPos, size, color);
+                break;
+            case DOOR:
+                color = Color.GREEN;
+    
+                gui.draw(g, xPos, yPos, size, color);
+                break;
+            case PLAYER_UP:
+            case PLAYER_RIGHT:
+            case PLAYER_DOWN:
+            case PLAYER_LEFT:
+                xPos += 2;
+                yPos += 2;
+                size -= 4;
+                color = Color.BLUE;
+    
+                int[] xPoints = null;
+                int[] yPoints = null;
+                switch (tile)
+                { // player direction pointer
+                    case PLAYER_UP:
+                        xPoints = new int[] { xPos + size * 1 / 4,
+                            xPos + size * 2 / 4, xPos + size * 3 / 4 };
+                        yPoints = new int[] { yPos + size * 3 / 4,
+                            yPos + size * 1 / 4, yPos + size * 3 / 4 };
+                        break;
+                    case PLAYER_DOWN:
+                        xPoints = new int[] { xPos + size * 1 / 4,
+                            xPos + size * 2 / 4, xPos + size * 3 / 4 };
+                        yPoints = new int[] { yPos + size * 1 / 4,
+                            yPos + size * 3 / 4, yPos + size * 1 / 4 };
+                        break;
+                    case PLAYER_LEFT:
+                        xPoints = new int[] { xPos + size * 3 / 4,
+                            xPos + size * 1 / 4, xPos + size * 3 / 4 };
+                        yPoints = new int[] { yPos + size * 1 / 4,
+                            yPos + size * 2 / 4, yPos + size * 3 / 4 };
+                        break;
+                    case PLAYER_RIGHT:
+                        xPoints = new int[] { xPos + size * 1 / 4,
+                            xPos + size * 3 / 4, xPos + size * 1 / 4 };
+                        yPoints = new int[] { yPos + size * 1 / 4,
+                            yPos + size * 2 / 4, yPos + size * 3 / 4 };
+                        break;
+                }
+    
+                gui.draw(g, xPos, yPos, size, color);
+                gui.draw(g, xPoints, yPoints, Color.CYAN);
+                break;
         }
 
     }
