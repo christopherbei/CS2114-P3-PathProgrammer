@@ -60,7 +60,7 @@ public class GraphicDisplay
         width = map[0].length;
 
         frame = new JFrame("PathProgrammer");
-        
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setSize(600, 600);
@@ -71,7 +71,7 @@ public class GraphicDisplay
 
         gui = new DrawComponent();
         frame.add(gui);
-        
+
         leftBuffer = (frame.getWidth() - width * SCALE) / 2;
         topBuffer = (frame.getHeight() + 25 - height * SCALE) / 2;
 

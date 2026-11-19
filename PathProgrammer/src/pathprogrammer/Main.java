@@ -1,5 +1,7 @@
-// SOLUTION: f f r f f l f f l l f f f f l f f l f f r f f r f l f f l f r f l f
-// f l f r f f l f r f f f r f f r f
+// SOLUTION:
+// f f r f f l f f l l f f f f l f f l f f r f f r f l
+// f f l f r f l f f l f r f f l f r f f f r f f r f
+
 package pathprogrammer;
 
 import java.util.Scanner;
@@ -10,19 +12,24 @@ import java.util.Scanner;
  * @author Group 7
  * @version 6 Nov 2026
  */
-public class Main {
+public class Main
+{
     /**
      * enum to represent all possible player moves
      */
-    public static enum moves {
-        FORWARD, LEFT, RIGHT
+    public static enum moves
+    {
+        FORWARD,
+        LEFT,
+        RIGHT
     }
 
 
     /**
      * enum to represent all tiles and player orientations
      */
-    public static enum tiles {
+    public static enum tiles
+    {
         PLAYER_UP,
         PLAYER_DOWN,
         PLAYER_LEFT,
@@ -58,7 +65,8 @@ public class Main {
     /**
      * the initial method and main loop for the program to run
      */
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         // title and setup
         System.out.println(
             "                                                                                  \r\n"
@@ -75,19 +83,22 @@ public class Main {
         // takes user input to decide what display format to use
         System.out.print("display format (gui or terminal): ");
         String preference = input.nextLine();
-        while (!preference.equals("gui") && !preference.equals("terminal")) {
+        while (!preference.equals("gui") && !preference.equals("terminal"))
+        {
             System.out.print("not recognized, try again: ");
             preference = input.nextLine();
         }
 
         gui = (preference.equals("gui"));
-        if (gui) {
+        if (gui)
+        {
             GUI = new GraphicDisplay(map.getMap());
         }
         System.out.println();
 
         // main game loop
-        while (!running) {
+        while (!running)
+        {
             System.out.println(
                 "use commands 'forward' 'right' and 'left' to set your moves");
             System.out.println(
@@ -101,10 +112,12 @@ public class Main {
         // end game logic
         runCommands();
 
-        if (map.winCondition() && commands.isEmpty()) {
+        if (map.winCondition() && commands.isEmpty())
+        {
             System.out.println("congratulations! you win!");
         }
-        else {
+        else
+        {
             System.out.println("you lost... try again?");
         }
 
@@ -115,12 +128,15 @@ public class Main {
     /**
      * calls the display methods for the chosen display type
      */
-    private static void callDisplay() {
-        if (gui) {
+    private static void callDisplay()
+    {
+        if (gui)
+        {
             System.out.println();
             GUI.displayMap(map.getMap());
         }
-        else {
+        else
+        {
             Display.displayMap(map.getMap());
         }
         Display.displayMoves(commands.toArray(moves.class));
@@ -130,19 +146,22 @@ public class Main {
     /**
      * takes user input and runs the corresponding command, if valid
      */
-    private static void validateInput() {
+    private static void validateInput()
+    {
         // takes and cleans up user input
         System.out.print("input a command: ");
         String command = input.nextLine();
         command = command.toLowerCase().trim();
 
         // prints new lines to clean up console
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 50; i++)
+        {
             System.out.println();
         }
 
         // checks for valid commands and runs / adds them
-        switch (command) {
+        switch (command)
+        {
             case "forward":
             case "f":
                 commands.enqueue(moves.FORWARD);
@@ -172,11 +191,13 @@ public class Main {
     /**
      * handles logic of running the queue of player commands
      */
-    private static void runCommands() {
+    private static void runCommands()
+    {
         int moves = 0;
         int speedup = 0;
 
-        while (!commands.isEmpty()) {
+        while (!commands.isEmpty())
+        {
             // display map
             callDisplay();
 
@@ -184,32 +205,39 @@ public class Main {
             boolean success = map.movePlayer(commands.peek());
 
             // delays console for one second
-            try {
+            try
+            {
                 Thread.sleep(800 - speedup);
             }
-            catch (InterruptedException e) {
+            catch (InterruptedException e)
+            {
                 e.printStackTrace();
             }
 
             // prints new lines to clean up console
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 50; i++)
+            {
                 System.out.println();
             }
 
             // updates queue if player moved, ends loop if the move failed
-            if (success) {
+            if (success)
+            {
                 commands.dequeue();
             }
-            else {
+            else
+            {
                 break;
             }
 
             // speeds up the loop as it goes on
             moves++;
-            if (moves > 10) {
+            if (moves > 10)
+            {
                 speedup = 400;
             }
-            else if (moves > 5) {
+            else if (moves > 5)
+            {
                 speedup = 200;
             }
         }
