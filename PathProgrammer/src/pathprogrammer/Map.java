@@ -26,22 +26,22 @@ public class Map
     private int goalColumn;
     private int keyCount = 0;
 
-    private static HashMap<tiles, tiles> turnLeft = new HashMap<>();
-    static
-    {
-        turnLeft.put(tiles.PLAYER_UP, tiles.PLAYER_RIGHT);
-        turnLeft.put(tiles.PLAYER_RIGHT, tiles.PLAYER_DOWN);
-        turnLeft.put(tiles.PLAYER_DOWN, tiles.PLAYER_LEFT);
-        turnLeft.put(tiles.PLAYER_LEFT, tiles.PLAYER_UP);
-    }
-
     private static HashMap<tiles, tiles> turnRight = new HashMap<>();
     static
     {
-        turnRight.put(tiles.PLAYER_UP, tiles.PLAYER_LEFT);
-        turnRight.put(tiles.PLAYER_LEFT, tiles.PLAYER_DOWN);
-        turnRight.put(tiles.PLAYER_DOWN, tiles.PLAYER_RIGHT);
-        turnRight.put(tiles.PLAYER_RIGHT, tiles.PLAYER_UP);
+        turnRight.put(tiles.PLAYER_UP, tiles.PLAYER_RIGHT);
+        turnRight.put(tiles.PLAYER_RIGHT, tiles.PLAYER_DOWN);
+        turnRight.put(tiles.PLAYER_DOWN, tiles.PLAYER_LEFT);
+        turnRight.put(tiles.PLAYER_LEFT, tiles.PLAYER_UP);
+    }
+
+    private static HashMap<tiles, tiles> turnLeft = new HashMap<>();
+    static
+    {
+        turnLeft.put(tiles.PLAYER_UP, tiles.PLAYER_LEFT);
+        turnLeft.put(tiles.PLAYER_LEFT, tiles.PLAYER_DOWN);
+        turnLeft.put(tiles.PLAYER_DOWN, tiles.PLAYER_RIGHT);
+        turnLeft.put(tiles.PLAYER_RIGHT, tiles.PLAYER_UP);
     }
 
     /**

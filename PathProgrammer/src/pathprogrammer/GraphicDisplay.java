@@ -32,7 +32,7 @@ public class GraphicDisplay
 
 
         /**
-         * draws a triangle to the panel
+         * draws a polygon to the panel
          */
         public void draw(Graphics g, int[] x, int[] y, Color color)
         {
@@ -48,6 +48,8 @@ public class GraphicDisplay
     private DrawComponent gui;
     private int height;
     private int width;
+    private int leftBuffer;
+    private int topBuffer;
 
     /**
      * initializes the gui
@@ -58,8 +60,8 @@ public class GraphicDisplay
         width = map[0].length;
 
         frame = new JFrame("PathProgrammer");
+        
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         frame.setResizable(false);
         frame.setSize(600, 600);
         frame.getContentPane().setBackground(Color.GRAY);
@@ -69,6 +71,9 @@ public class GraphicDisplay
 
         gui = new DrawComponent();
         frame.add(gui);
+        
+        leftBuffer = (frame.getWidth() - width * SCALE) / 2;
+        topBuffer = (frame.getHeight() + 25 - height * SCALE) / 2;
 
         displayMap(map);
     }
@@ -112,15 +117,15 @@ public class GraphicDisplay
 
         Graphics g = frame.getGraphics();
 
-        int leftBuffer = (frame.getWidth() - width * SCALE) / 2;
-        int topBuffer = (frame.getHeight() + 25 - height * SCALE) / 2;
-
         int xPos = leftBuffer + x * SCALE;
         int yPos = topBuffer + y * SCALE;
+        int[] xPoints = null;
+        int[] yPoints = null;
         int size = SCALE;
         Color color = Color.BLACK;
 
-        switch(tile) {
+        switch (tile)
+        {
             case WALL:
                 gui.draw(g, xPos, yPos, size, color);
                 break;
@@ -129,7 +134,7 @@ public class GraphicDisplay
                 yPos += 4;
                 size -= 8;
                 color = Color.YELLOW;
-    
+
                 gui.draw(g, xPos, yPos, size, color);
                 break;
             case KEY:
@@ -137,55 +142,69 @@ public class GraphicDisplay
                 yPos += 4;
                 size -= 8;
                 color = Color.GREEN;
-    
+
                 gui.draw(g, xPos, yPos, size, color);
                 break;
             case DOOR:
                 color = Color.GREEN;
-    
+
                 gui.draw(g, xPos, yPos, size, color);
                 break;
             case PLAYER_UP:
-            case PLAYER_RIGHT:
+                xPos += 2;
+                yPos += 2;
+                size -= 4;
+                color = Color.BLUE;
+
+                xPoints = new int[] { xPos + size * 1 / 4, xPos + size * 2 / 4,
+                    xPos + size * 3 / 4 };
+                yPoints = new int[] { yPos + size * 3 / 4, yPos + size * 1 / 4,
+                    yPos + size * 3 / 4 };
+
+                gui.draw(g, xPos, yPos, size, color);
+                gui.draw(g, xPoints, yPoints, Color.WHITE);
+                break;
             case PLAYER_DOWN:
+                xPos += 2;
+                yPos += 2;
+                size -= 4;
+                color = Color.BLUE;
+
+                xPoints = new int[] { xPos + size * 1 / 4, xPos + size * 2 / 4,
+                    xPos + size * 3 / 4 };
+                yPoints = new int[] { yPos + size * 1 / 4, yPos + size * 3 / 4,
+                    yPos + size * 1 / 4 };
+
+                gui.draw(g, xPos, yPos, size, color);
+                gui.draw(g, xPoints, yPoints, Color.WHITE);
+                break;
             case PLAYER_LEFT:
                 xPos += 2;
                 yPos += 2;
                 size -= 4;
                 color = Color.BLUE;
-    
-                int[] xPoints = null;
-                int[] yPoints = null;
-                switch (tile)
-                { // player direction pointer
-                    case PLAYER_UP:
-                        xPoints = new int[] { xPos + size * 1 / 4,
-                            xPos + size * 2 / 4, xPos + size * 3 / 4 };
-                        yPoints = new int[] { yPos + size * 3 / 4,
-                            yPos + size * 1 / 4, yPos + size * 3 / 4 };
-                        break;
-                    case PLAYER_DOWN:
-                        xPoints = new int[] { xPos + size * 1 / 4,
-                            xPos + size * 2 / 4, xPos + size * 3 / 4 };
-                        yPoints = new int[] { yPos + size * 1 / 4,
-                            yPos + size * 3 / 4, yPos + size * 1 / 4 };
-                        break;
-                    case PLAYER_LEFT:
-                        xPoints = new int[] { xPos + size * 3 / 4,
-                            xPos + size * 1 / 4, xPos + size * 3 / 4 };
-                        yPoints = new int[] { yPos + size * 1 / 4,
-                            yPos + size * 2 / 4, yPos + size * 3 / 4 };
-                        break;
-                    case PLAYER_RIGHT:
-                        xPoints = new int[] { xPos + size * 1 / 4,
-                            xPos + size * 3 / 4, xPos + size * 1 / 4 };
-                        yPoints = new int[] { yPos + size * 1 / 4,
-                            yPos + size * 2 / 4, yPos + size * 3 / 4 };
-                        break;
-                }
-    
+
+                xPoints = new int[] { xPos + size * 3 / 4, xPos + size * 1 / 4,
+                    xPos + size * 3 / 4 };
+                yPoints = new int[] { yPos + size * 1 / 4, yPos + size * 2 / 4,
+                    yPos + size * 3 / 4 };
+
                 gui.draw(g, xPos, yPos, size, color);
-                gui.draw(g, xPoints, yPoints, Color.CYAN);
+                gui.draw(g, xPoints, yPoints, Color.WHITE);
+                break;
+            case PLAYER_RIGHT:
+                xPos += 2;
+                yPos += 2;
+                size -= 4;
+                color = Color.BLUE;
+
+                xPoints = new int[] { xPos + size * 1 / 4, xPos + size * 3 / 4,
+                    xPos + size * 1 / 4 };
+                yPoints = new int[] { yPos + size * 1 / 4, yPos + size * 2 / 4,
+                    yPos + size * 3 / 4 };
+
+                gui.draw(g, xPos, yPos, size, color);
+                gui.draw(g, xPoints, yPoints, Color.WHITE);
                 break;
         }
 
