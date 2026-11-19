@@ -12,7 +12,7 @@ The feature only touched the Map, Main and Display classes in order to add the l
 No, the change did not cross the model/view line. The logic components were isolated in the model while the new tiles to be displayed to the screen were isolated to the view. 
 
 ### What changed from your D3 plan? Features, signatures, validation, or tests that differ from what you said you'd do, and why.
-The only things that changed was we decided to be more ambitious and to add more features. We modified the program so that the terminal always displayed the commands so the user would always be able to easily see what commands the user can use. We also added a GUI option, which was one of our stretch goals. We made another small quality of life tweak where you can just type the first letter of a command so that it is faster to type the commands.
+The only things that changed was we decided to be more ambitious and to add more features. We added interactable tiles where the user must pick up the key to be able to open the door. We also added a GUI option, which was one of our stretch goals. We made another small quality of life tweak where you can quicky input commands now by doing "f" for forward, "r" for right, and "l" for left.
 
 ### What doesn't work yet? MVP features, bad-input cases, or tests that are missing or failing. All MVP features, bad-input cases, and tests work.
 There is nothing that does not work yet in the program. Every MVP feature has been implemented, the stretch goals of adding a GUI and interactable tiles were successfully implemented, every bad input case is accounted for and there is adequate testing for normal cases and bad input cases.
