@@ -1,6 +1,8 @@
 ## How to run the program:
 Download the game folder and run the Main.java file in eclipse or through a terminal.
 
+## How to run the tests:
+Run the JUnit test on each test file.
 
 ## Reflection:
 How did your design absorb the change? List the classes your feature actually touched. Compare that with the prediction in your D3 Next Steps: what matched, what surprised you?
@@ -36,12 +38,13 @@ Who does what? Which team member owns each remaining item.
 | :--- | :--- |
 | Main | Written by Chris |
 | Map | Written by Blake, debugged with Codex |
+| MapTest | Written by Tyler |
 | Display | Written by Tyler |
 | GraphicDisplay | Written by Chris|
 | Queue | Written by Chris, GenAI debugged methods |
-| QueueTest | Written by Chris |
+| QueueTest | Written by Chris and revised by Tyler |
 | Node | Written by Chris |
-| NodeTest | Written by Chris |
+| NodeTest | Written by Chris and revised by Tyler |
 
 ## GenAI Note:
 GenAI was used to debug specific methods.

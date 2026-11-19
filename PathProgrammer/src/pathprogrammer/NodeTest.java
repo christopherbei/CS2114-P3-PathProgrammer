@@ -27,22 +27,39 @@ class NodeTest
 
 
     /**
-     * tests main behaviors for the node class
+     * Tests normal constructor behavior and data retrieval
      */
     @Test
-    void testNode()
-    {
+    void testConstructorsAndGetData() {
         assertEquals("red", node1.getData());
         assertEquals("green", node2.getData());
-
         assertEquals(node2, node1.getNext());
         assertNull(node2.getNext());
-        
+    }
+
+
+    /**
+     * Tests setting and updating the next reference
+     */
+    @Test
+    void testSetNext() {
         node2.setNext(node1);
         node1.setNext(null);
-        
         assertEquals(node1, node2.getNext());
         assertNull(node1.getNext());
+    }
+
+
+    /**
+     * Tests edge and bad input cases where node data or references are null
+     */
+    @Test
+    void testNullValues() {
+        Node<String> nullNode = new Node<>(null, null);
+        assertNull(nullNode.getData());
+        assertNull(nullNode.getNext());
+        nullNode.setNext(node1);
+        assertEquals(node1, nullNode.getNext());
     }
 
 }

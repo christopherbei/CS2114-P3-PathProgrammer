@@ -43,6 +43,36 @@ class QueueTest
     }
 
     /**
+     * tests size
+     */
+    @Test
+    void testQueueSize() {
+        assertEquals(0, queue.size());
+        queue.enqueue("a");
+        queue.enqueue("b");
+        assertEquals(2, queue.size());
+        queue.dequeue();
+        assertEquals(1, queue.size());
+    }
+
+    /**
+     * tests to check the order after interleaved enqueues and dequeues
+     */
+    @Test
+    void testInterleavedOperations() {
+        queue.enqueue("first");
+        queue.enqueue("second");
+        assertEquals("first", queue.dequeue());
+        queue.enqueue("third");
+        
+        assertEquals("second", queue.peek());
+        assertEquals("second", queue.dequeue());
+        assertEquals("third", queue.dequeue());
+        
+        assertTrue(queue.isEmpty());
+    }
+    
+    /**
      * tests the clear method
      */
     @Test
